@@ -3,7 +3,10 @@
 
 #########################################
 # About:This script finds the users with read access to the repository
-# Input: Two command line arguments are required. Organization name, and Repo name
+# Input: 1) Two command line arguments are required. Organization name, and Repo name
+#        2) In linux terminal command use the following commands to hide username and token:
+#               export username="repo_name_goes_here"
+#               export token="token_value_goes_here"  
 #
 # Owner: Raja Khan
 #
@@ -13,9 +16,7 @@
 API_URL="https://api.github.com"
 
 # GitHub username and personal access token
-# In linux terminal command use the following commands to hide username and token:
-#     export username="repo_name_goes_here"
-#     export token="token_value_goes_here"
+
 USERNAME=$username
 TOKEN=$token
 
@@ -64,9 +65,18 @@ function list_users_with_read_access {
     fi
 }
 
+function helper {
+    expected_cmd_args=2
+    if [ $# -ne $expected_cmd_args ]; then
+        echo "Please execute the script with required command arguments."
+        echo "Example: ./list-users.sh REPO_OWNER REPO_NAME"
+   exit 1     
+    fi
+}
 
 
-# Main script
+# Main 
 
-echo "Listing users with read access to ${REPO_OWNER}/${REPO_NAME}..."
+helper "$@"         # "$@" passes all the cmd line args to the helper function. Without it "$#" will be zero.
+echo "Listing users with read access to ${REPOOWNER}/${REPO_NAME}..."
 list_users_with_read_access
