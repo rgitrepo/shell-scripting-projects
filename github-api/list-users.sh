@@ -1,15 +1,13 @@
 #!/bin/bash
 
 
-##########################
+#########################################
+# About:This script finds the users with read access to the repository
+# Input: Two command line arguments are required. Organization name, and Repo name
 #
+# Owner: Raja Khan
 #
-#
-#
-#
-#
-#
-##########################
+#########################################
 
 # GitHub API URL
 API_URL="https://api.github.com"
@@ -36,7 +34,7 @@ function github_api_get {
     curl -s -u "${USERNAME}:${TOKEN}" "$url"
 }
 
-# Function to list users with read access to the repository 
+# Function to list users with read access to the repository
     # 
     # jq -r: The jq command is followed by the -r option, which stands for "raw output." 
     # This option tells jq to output raw strings, without JSON quotes, for easier use in scripts and command lines.
@@ -65,6 +63,8 @@ function list_users_with_read_access {
         echo "$collaborators"
     fi
 }
+
+
 
 # Main script
 
